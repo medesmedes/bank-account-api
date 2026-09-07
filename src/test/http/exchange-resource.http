@@ -1,0 +1,4 @@
+### Task 2 - DKK to USD exchange
+@host = http://localhost:8080
+GET {{host}}/exchange
+Accept: application/json

@@ -1,0 +1,45 @@
+### Bank Account API - request collection
+
+@host = http://localhost:8080
+@accountNumber= DKBD00000001
+@accountNumberTwo = DKBD00000002
+
+### Create account (DKBD00000001 on a fresh DB)
+POST {{host}}/accounts
+Content-Type: application/json
+
+{
+  "firstName": "Harald",
+  "lastName": "Blaatand"
+}
+
+### Create a second account for transfers (DKBD00000002)
+POST {{host}}/accounts
+Content-Type: application/json
+
+{
+  "firstName": "Gorm",
+  "lastName": "den Gamle"
+}
+
+### Get balance
+GET {{host}}/accounts/{{accountNumber}}
+Accept: application/json
+
+### Deposit money
+POST {{host}}/accounts/{{accountNumber}}/deposit
+Content-Type: application/json
+
+{
+  "amount": 100.00
+}
+
+
+### Transfer money (source is the path account, target in the body)
+POST {{host}}/accounts/{{accountNumber}}/transfer
+Content-Type: application/json
+
+{
+  "toAccountNumber": "{{accountNumberTwo}}",
+  "amount": 25.00
+}
